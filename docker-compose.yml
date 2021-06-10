@@ -1,0 +1,25 @@
+version: '3'
+services:
+    ecommerce-frontend:
+        build: ./03-frontend/angular-ecommerce
+        image: 'ecommerce-fe'
+        ports: 
+            - "4200:80"
+    ecommerce-backend:
+        build: ./02-backend
+        image: 'ecommerce-be'
+        ports:
+            - "8080:8080"
+        depends_on: 
+            - db
+    db:
+        build: ./ecommerce-db
+        image: 'ecommerce-db'
+        ports:
+            - "5432:5432"
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=HorseCatRat01
+            - POSTGRES_DB=ecommercedb
+            
+        
